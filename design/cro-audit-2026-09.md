@@ -28,8 +28,24 @@ The initial version of this audit assumed the homepage lacked trust badges, a de
 ## Bugs found directly in the theme code (fixed in the draft)
 
 1. **Duplicate chatbot script.** The homepage JSON template had the same Typebot chat-widget `custom-liquid` block twice (identical script, two section IDs). Likely two chat bubbles / double init. Removed the duplicate.
-2. **Mislabeled size cards.** The "Shop by Size" cards (How It Works section) all read "3ml Spray (0.10 Oz) — From $15.99" regardless of size — the 5ml, 8ml, and 10ml cards used the wrong title and copied the same price, even though each card already had the correct product image for its size. Corrected the titles to match each card's image (3ml/5ml/8ml Travel Bottle/10ml) and removed the copy-pasted price from the 5/8/10ml cards (replaced with "Priced by fragrance," since price varies by product and a flat number was misleading — showing one wrong price next to every size is the kind of shipping-cost surprise that already drags down checkout completion).
+2. **Mislabeled size cards.** The "Shop by Size" cards (How It Works section) all read "3ml Spray (0.10 Oz) — From $15.99" regardless of size — the 5ml, 8ml, and 10ml cards used the wrong title and copied the same price, even though each card already had the correct product image for its size. Corrected the titles to match each card's image (3ml/5ml/8ml Travel Bottle/10ml). The price on each card was first replaced with "Priced by fragrance" (since a flat number was misleading), then, once the full catalog was scanned for real per-size minimums (see below), replaced again with the verified catalog-wide "from" price for that size.
 3. **Featured-product spotlight didn't match sales data.** The homepage's single featured-product block spotlighted "Roja Parfums Espresso Aoud." Swapped it to **Maison Francis Kurkdjian Baccarat Rouge 540 Extrait** — the actual #1 seller by 30-day gross sales, and already the top product in the homepage's own reviews carousel, so the spotlight and the social proof now agree.
+
+## Real per-size starting prices (full catalog scan)
+
+To put accurate "from" prices on the size cards instead of guesses, every active product's variants (1,389 active products, paginated in full — confirmed reaching the end of the catalog) were scanned and grouped by size, excluding the non-fragrance "Shipping Protection" line item:
+
+| Size | Real lowest live price | Sample size | Used on the size cards? |
+|---|---|---|---|
+| 3ml | **$5.99** (Geoffrey Beene Grey Flannel EDT) | 1,299 variants | Yes — "From $5.99" |
+| 5ml | **$7.99** (Geoffrey Beene Grey Flannel EDT) | 1,299 variants | Yes — "From $7.99" |
+| 8ml Travel Bottle | **$11.99** (Geoffrey Beene Grey Flannel EDT) | 1,274 variants | Yes — "From $11.99" |
+| 10ml | **$14.99** (John Varvatos EDT) | 976 variants | Yes — "From $14.99" |
+| 100ml full bottle | $79.99 (Montale Ristretto Intense Café) | 58 variants | Not used on homepage (no 100ml card) |
+| 125ml full bottle | $149.00 (JPG Le Beau Le Parfum) | 6 variants | Not used on homepage (no 125ml card) |
+| 50ml / 70ml / 90ml | $170 / $495 / $225 | 1 variant each | Not usable as a "from" price — single-listing, not representative |
+
+The 3/5/8/10ml numbers are each backed by 900–1,300+ live variants, so they're solid for marketing. The homepage's "Shop by Size" cards (`how_it_works_V8cLQ7` in `templates/index.json`, draft theme) were updated to these verified figures, replacing the earlier "Priced by fragrance" placeholder and the original, wrong "$15.99 for every size" copy.
 
 ## Where this was implemented
 
