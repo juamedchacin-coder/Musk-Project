@@ -1,0 +1,39 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html", "title": "Home — móvil", "x": 0, "y": 0, "w": 390, "h": 3700 },
+    { "file": "Producto.dc.html", "title": "Producto — móvil", "x": 530, "y": 0, "w": 390, "h": 1700, "is_interactive": true },
+    { "file": "Carrito.dc.html", "title": "Carrito — móvil", "x": 1050, "y": 0, "w": 390, "h": 1080 },
+    { "file": "HomeDesktop.dc.html", "title": "Home — desktop", "x": 1580, "y": 0, "w": 1440, "h": 3700 }
+  ],
+  "annotations": [
+    {
+      "id": "nota-home",
+      "x": 0,
+      "y": -230,
+      "w": 390,
+      "text": "HOME MÓVIL — el 79.7% de tus sesiones entra por aquí.\n\nLo nuevo: buscador arriba (tienes 1,300+ referencias), \"Pick your size\" con los precios reales mínimos, y los bestsellers reales del mes con su rating verificado."
+    },
+    {
+      "id": "nota-producto",
+      "x": 530,
+      "y": -230,
+      "w": 390,
+      "text": "PRODUCTO — aquí se decide la compra.\n\nEl selector de tamaño es interactivo: tócalo y cambian el precio y la barra de envío gratis. Precios reales de Baccarat Rouge 540 Extrait."
+    },
+    {
+      "id": "nota-carrito",
+      "x": 1050,
+      "y": -230,
+      "w": 390,
+      "text": "CARRITO — la fuga más grande (75.5% no termina el checkout).\n\nBarra de envío gratis a $75, costo de envío visible ANTES del checkout, protección de envío marcada como opcional y botones de pago express."
+    },
+    {
+      "id": "nota-desktop",
+      "x": 1580,
+      "y": -230,
+      "w": 560,
+      "text": "DESKTOP — hoy convierte 0.79% contra 2.18% en móvil, o sea que es la superficie que peor rinde.\n\nMisma estructura que móvil, aprovechando el ancho: hero partido, tamaños en 4 columnas y bestsellers en grilla de 5."
+    }
+  ],
+  "launch": { "view": "canvas" }
+}
