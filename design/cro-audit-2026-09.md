@@ -47,6 +47,31 @@ To put accurate "from" prices on the size cards instead of guesses, every active
 
 The 3/5/8/10ml numbers are each backed by 900–1,300+ live variants, so they're solid for marketing. The homepage's "Shop by Size" cards (`how_it_works_V8cLQ7` in `templates/index.json`, draft theme) were updated to these verified figures, replacing the earlier "Priced by fragrance" placeholder and the original, wrong "$15.99 for every size" copy.
 
+## Redesign applied to the draft theme (homepage)
+
+The mockups were translated into the draft theme using sections the theme already ships, so no new Liquid was needed:
+
+- **Hero copy** now leads with the decant proposition and the real entry price — "Try it before you commit to the bottle." / "…Sample sizes from $5.99 — no $300 blind buys."
+- **Trust badge** "Fast & Reliable Shipping" → "Free Shipping Over $75", stating the real threshold up front instead of a vague claim (the truck icon still fits).
+- **"Shop by Size" is now visible on mobile.** The `how-it-works` section had `hide_on_mobile: true`, so the four size cards — the single most important decision on this store — never rendered for the 79.7% of traffic that is mobile. The section's own CSS has explicit rules for phone widths (cards drop to 2 columns under 1023px) and the setting defaults to off, so it was authored to show there.
+- **Duplicate steps disabled.** `mobile-how-it-works` repeated the same three steps that the now-visible section already shows; it is set to `disabled` rather than deleted, so it is one click to restore.
+- **Section order rebuilt for mobile**: hero → trust → sizes → Best Sellers → New Arrivals → New Releases → … Previously the size cards sat seventh and Best Sellers ninth, below three filler sections.
+
+### What still needs custom Liquid
+
+The cart free-shipping progress bar and the per-size prices inside the product page's size selector are new components, not settings — they need section code written, which is a separate build from a homepage settings pass.
+
+### Theme settings to flip by hand
+
+Four switches in the draft theme's **Theme settings** would apply the rest of the cart mockup. They live in `config/settings_data.json`, which also holds every color scheme, font and app-embed block in the theme; that file could not be rewritten safely from here (a byte-exact reconstruction could not be verified against its checksum, and a near-miss would silently alter theme-wide configuration), so these are left as one-click changes in the theme editor:
+
+| Setting | Current | Should be | Why |
+|---|---|---|---|
+| `cart_drawer_show_accelerated_button` | off | **on** | Shop Pay / PayPal / Apple Pay buttons in the cart drawer |
+| `cart_estimate_shipping` | off | **on** | Shipping cost visible in cart instead of a surprise at checkout |
+| `show_review_badge` | off | **on** | Verified ratings on product cards (Judge.me data already exists) |
+| `pcard_show_lowest_prices` | off | **on** | "From $X" on product cards, matching how the catalog is priced |
+
 ## Where this was implemented
 
 All three fixes were applied to `templates/index.json` in a new **unpublished (draft) theme — "CRO Redesign – Home"** (`gid://shopify/OnlineStoreTheme/163292446937`), duplicated from the live theme via the Shopify Admin API. Writes to the live/MAIN theme are blocked by that API, so the storefront customers see today is unchanged. To review:
